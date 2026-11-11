@@ -28,6 +28,11 @@ from langchain_community.document_loaders import PyPDFLoader
 
 load_dotenv()
 
+try:
+    GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+except Exception:
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
 st.set_page_config(
     page_title="PDF Intelligence | AI Assistant",
     page_icon="📚",
