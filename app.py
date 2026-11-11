@@ -33,6 +33,9 @@ try:
 except Exception:
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
+if GOOGLE_API_KEY:
+    os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
+
 st.set_page_config(
     page_title="PDF Intelligence | AI Assistant",
     page_icon="📚",
@@ -223,7 +226,8 @@ def create_vector_store(pdf_bytes):
         # Create embeddings
 
         embedding_model = GoogleGenerativeAIEmbeddings(
-            model="gemini-embedding-001"
+            model="gemini-embedding-001",
+             google_api_key=GOOGLE_API_KEY
         )
 
         # Store vectors in ChromaDB
@@ -293,7 +297,8 @@ def create_rag_chain(vector_store):
 
     model = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
-        temperature=0
+        temperature=0,
+         google_api_key=GOOGLE_API_KEY
     )
 
     # Output parser
