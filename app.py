@@ -36,6 +36,8 @@ except Exception:
 if GOOGLE_API_KEY:
     os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 
+
+st.write("API key configured:", bool(GOOGLE_API_KEY))
 st.set_page_config(
     page_title="PDF Intelligence | AI Assistant",
     page_icon="📚",
@@ -391,11 +393,10 @@ if uploaded_file is not None:
 
     if st.button("🚀 Upload & Process PDF"):
 
-        if not os.getenv("GOOGLE_API_KEY"):
-
+        if not GOOGLE_API_KEY:
             st.error(
                 "Google API key not found. "
-                "Please configure your .env file."
+                "Please configure GOOGLE_API_KEY in Streamlit Cloud Secrets."
             )
 
         else:
